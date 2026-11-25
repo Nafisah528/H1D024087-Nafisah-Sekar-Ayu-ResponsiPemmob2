@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../models/location_model.dart';
 import '../../../models/weather_model.dart';
+import '../../../utils/app_theme.dart';
 import '../../../utils/weather_utils.dart';
 
 class CurrentWeatherCard extends StatelessWidget {
@@ -30,8 +31,8 @@ class CurrentWeatherCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: condition.gradientColors.first.withValues(alpha: 0.35),
-            blurRadius: 20,
+            color: AppTheme.deepOcean.withValues(alpha: 0.25),
+            blurRadius: 22,
             offset: const Offset(0, 10),
           ),
         ],
@@ -59,8 +60,8 @@ class CurrentWeatherCard extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.location_on_rounded,
-                      color: Colors.white,
-                      size: 18,
+                      color: AppTheme.sunBeam,
+                      size: 20,
                     ),
                     const SizedBox(width: 6),
                     Flexible(
@@ -86,12 +87,16 @@ class CurrentWeatherCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
+                        color: Colors.white.withValues(alpha: 0.16),
                         shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppTheme.meltingIce.withValues(alpha: 0.3),
+                          width: 1,
+                        ),
                       ),
                       child: Icon(
                         condition.icon,
-                        color: Colors.white,
+                        color: condition.primaryColor,
                         size: 34,
                       ),
                     ),
@@ -127,9 +132,9 @@ class CurrentWeatherCard extends StatelessWidget {
                     const Text(
                       '°C',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.sunBeam,
                         fontSize: 28,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         height: 1.2,
                       ),
                     ),
@@ -165,13 +170,17 @@ class CurrentWeatherCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.2),
+        color: Colors.white.withValues(alpha: 0.16),
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppTheme.meltingIce.withValues(alpha: 0.25),
+          width: 0.8,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: Colors.white, size: 14),
+          Icon(icon, color: AppTheme.sunBeam, size: 14),
           const SizedBox(width: 6),
           Text(
             label,

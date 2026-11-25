@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/weather_model.dart';
+import '../../../utils/app_theme.dart';
 
 class WeatherDetailsGrid extends StatelessWidget {
   final CurrentWeather current;
@@ -23,7 +24,7 @@ class WeatherDetailsGrid extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF1A1F36),
+            color: AppTheme.blackPine,
           ),
         ),
         const SizedBox(height: 12),
@@ -32,7 +33,8 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.water_drop_rounded,
-                iconColor: const Color(0xFF29B6F6),
+                iconColor: AppTheme.windstorm,
+                iconBgColor: AppTheme.meltingIce.withValues(alpha: 0.4),
                 title: 'Kelembapan',
                 value: '${current.relativeHumidity}%',
                 subtitle: 'Udara lembap',
@@ -42,7 +44,8 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.air_rounded,
-                iconColor: const Color(0xFF26A69A),
+                iconColor: AppTheme.deepOcean,
+                iconBgColor: AppTheme.avalanche,
                 title: 'Kecepatan Angin',
                 value: '${current.windSpeed.toStringAsFixed(1)} km/h',
                 subtitle: 'Angin sepoi',
@@ -56,7 +59,8 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.umbrella_rounded,
-                iconColor: const Color(0xFF5C6BC0),
+                iconColor: AppTheme.windstorm,
+                iconBgColor: AppTheme.meltingIce.withValues(alpha: 0.4),
                 title: 'Peluang Hujan',
                 value: '$rainProb%',
                 subtitle: 'Kemungkinan presipitasi',
@@ -66,7 +70,8 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.grain_rounded,
-                iconColor: const Color(0xFF42A5F5),
+                iconColor: AppTheme.deepOcean,
+                iconBgColor: AppTheme.avalanche,
                 title: 'Curah Hujan',
                 value: '${current.precipitation.toStringAsFixed(1)} mm',
                 subtitle: 'Akumulasi saat ini',
@@ -81,6 +86,7 @@ class WeatherDetailsGrid extends StatelessWidget {
   Widget _buildDetailCard({
     required IconData icon,
     required Color iconColor,
+    required Color iconBgColor,
     required String title,
     required String value,
     required String subtitle,
@@ -90,9 +96,13 @@ class WeatherDetailsGrid extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppTheme.meltingIce.withValues(alpha: 0.5),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: AppTheme.deepOcean.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -104,7 +114,7 @@ class WeatherDetailsGrid extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: iconColor.withValues(alpha: 0.12),
+              color: iconBgColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: iconColor, size: 22),
@@ -115,7 +125,7 @@ class WeatherDetailsGrid extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
-              color: Color(0xFF6B7280),
+              color: AppTheme.textMuted,
             ),
           ),
           const SizedBox(height: 4),
@@ -124,7 +134,7 @@ class WeatherDetailsGrid extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1F36),
+              color: AppTheme.blackPine,
             ),
           ),
           const SizedBox(height: 2),
@@ -132,7 +142,7 @@ class WeatherDetailsGrid extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontSize: 11,
-              color: Colors.grey.shade500,
+              color: AppTheme.textMuted.withValues(alpha: 0.8),
             ),
           ),
         ],

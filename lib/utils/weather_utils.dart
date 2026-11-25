@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_theme.dart';
 
 class WeatherConditionInfo {
   final String description;
@@ -16,109 +17,150 @@ class WeatherConditionInfo {
 
 class WeatherUtils {
   /// Mengonversi WMO Weather Interpretation Code ke deskripsi bahasa Indonesia,
-  /// ikon yang sesuai, dan warna aksen.
+  /// ikon yang sesuai, dan gradien warna selaras dengan color palette:
+  /// Black Pine (#152026), Deep Ocean (#1B3D59), Windstorm (#6A97C0),
+  /// Melting Ice (#B3D5F1), Avalanche (#D4EEF8), Sun Beam (#F3EED8).
   static WeatherConditionInfo getCondition(int code) {
     switch (code) {
-      case 0:
+      case 0: // Cerah
         return WeatherConditionInfo(
           description: 'Cerah',
           icon: Icons.wb_sunny_rounded,
-          primaryColor: Colors.amber.shade700,
-          gradientColors: [const Color(0xFFF6D365), const Color(0xFFFDA085)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            AppTheme.deepOcean,
+            AppTheme.windstorm,
+          ],
         );
-      case 1:
+      case 1: // Cerah Berawan
         return WeatherConditionInfo(
           description: 'Cerah Berawan',
           icon: Icons.wb_sunny_outlined,
-          primaryColor: Colors.orange.shade600,
-          gradientColors: [const Color(0xFF4FACFE), const Color(0xFF00F2FE)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            AppTheme.deepOcean,
+            Color(0xFF38688E),
+          ],
         );
-      case 2:
+      case 2: // Sebagian Berawan
         return WeatherConditionInfo(
           description: 'Sebagian Berawan',
           icon: Icons.cloud_queue_rounded,
-          primaryColor: Colors.blueGrey.shade600,
-          gradientColors: [const Color(0xFF3A7BD5), const Color(0xFF3A6073)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            Color(0xFF1B3D59),
+            AppTheme.windstorm,
+          ],
         );
-      case 3:
+      case 3: // Mendung / Berawan Tebal
         return WeatherConditionInfo(
           description: 'Mendung / Berawan Tebal',
           icon: Icons.cloud_rounded,
-          primaryColor: Colors.grey.shade700,
-          gradientColors: [const Color(0xFF5D6D7E), const Color(0xFF34495E)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            AppTheme.blackPine,
+            AppTheme.deepOcean,
+          ],
         );
       case 45:
-      case 48:
+      case 48: // Berkabut
         return WeatherConditionInfo(
           description: 'Berkabut',
           icon: Icons.blur_on_rounded,
-          primaryColor: Colors.blueGrey.shade400,
-          gradientColors: [const Color(0xFF757F9A), const Color(0xFFD7DDE8)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            AppTheme.windstorm,
+            Color(0xFF8EB5D6),
+          ],
         );
       case 51:
       case 53:
-      case 55:
+      case 55: // Gerimis
         return WeatherConditionInfo(
           description: 'Gerimis Ringan',
           icon: Icons.grain_rounded,
-          primaryColor: Colors.teal.shade600,
-          gradientColors: [const Color(0xFF4CA1AF), const Color(0xFF2C3E50)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            AppTheme.deepOcean,
+            Color(0xFF3B6A91),
+          ],
         );
-      case 61:
+      case 61: // Hujan Ringan
         return WeatherConditionInfo(
           description: 'Hujan Ringan',
           icon: Icons.water_drop_rounded,
-          primaryColor: Colors.blue.shade600,
-          gradientColors: [const Color(0xFF00C6FB), const Color(0xFF005BEA)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            AppTheme.deepOcean,
+            AppTheme.windstorm,
+          ],
         );
-      case 63:
+      case 63: // Hujan Sedang
         return WeatherConditionInfo(
           description: 'Hujan Sedang',
           icon: Icons.umbrella_rounded,
-          primaryColor: Colors.indigo.shade600,
-          gradientColors: [const Color(0xFF2193B0), const Color(0xFF6DD5ED)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            Color(0xFF132B40),
+            AppTheme.deepOcean,
+          ],
         );
-      case 65:
+      case 65: // Hujan Lebat
         return WeatherConditionInfo(
           description: 'Hujan Lebat',
           icon: Icons.thunderstorm_rounded,
-          primaryColor: Colors.blue.shade900,
-          gradientColors: [const Color(0xFF141E30), const Color(0xFF243B55)],
+          primaryColor: AppTheme.meltingIce,
+          gradientColors: const [
+            AppTheme.blackPine,
+            Color(0xFF16344D),
+          ],
         );
       case 71:
       case 73:
       case 75:
-      case 77:
+      case 77: // Bersalju
         return WeatherConditionInfo(
           description: 'Bersalju',
           icon: Icons.ac_unit_rounded,
-          primaryColor: Colors.cyan.shade600,
-          gradientColors: [const Color(0xFFE0EAFC), const Color(0xFFCFDEF3)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            AppTheme.windstorm,
+            Color(0xFF90B9DA),
+          ],
         );
       case 80:
       case 81:
-      case 82:
+      case 82: // Hujan Lokal
         return WeatherConditionInfo(
           description: 'Hujan Lokal / Hujan Petir',
           icon: Icons.cloud_sync_rounded,
-          primaryColor: Colors.deepPurple.shade600,
-          gradientColors: [const Color(0xFF3F51B5), const Color(0xFF2196F3)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            Color(0xFF142C42),
+            AppTheme.windstorm,
+          ],
         );
       case 95:
       case 96:
-      case 99:
+      case 99: // Badai Petir
         return WeatherConditionInfo(
           description: 'Badai Petir',
           icon: Icons.bolt_rounded,
-          primaryColor: Colors.deepOrange.shade800,
-          gradientColors: [const Color(0xFF0F2027), const Color(0xFF203A43), const Color(0xFF2C5364)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            AppTheme.blackPine,
+            AppTheme.deepOcean,
+          ],
         );
       default:
         return WeatherConditionInfo(
           description: 'Cerah Berawan',
           icon: Icons.wb_sunny_rounded,
-          primaryColor: Colors.blue.shade600,
-          gradientColors: [const Color(0xFF36D1DC), const Color(0xFF5B86E5)],
+          primaryColor: AppTheme.sunBeam,
+          gradientColors: const [
+            AppTheme.deepOcean,
+            AppTheme.windstorm,
+          ],
         );
     }
   }

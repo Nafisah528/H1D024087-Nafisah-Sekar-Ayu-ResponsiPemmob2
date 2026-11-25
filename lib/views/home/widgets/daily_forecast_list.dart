@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/weather_model.dart';
+import '../../../utils/app_theme.dart';
 import '../../../utils/weather_utils.dart';
 
 class DailyForecastList extends StatelessWidget {
@@ -25,7 +26,7 @@ class DailyForecastList extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF1A1F36),
+                color: AppTheme.blackPine,
               ),
             ),
             Text(
@@ -33,7 +34,7 @@ class DailyForecastList extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
-                color: Color(0xFF6B7280),
+                color: AppTheme.textMuted,
               ),
             ),
           ],
@@ -43,9 +44,13 @@ class DailyForecastList extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(22),
+            border: Border.all(
+              color: AppTheme.meltingIce.withValues(alpha: 0.5),
+              width: 1,
+            ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.03),
+                color: AppTheme.deepOcean.withValues(alpha: 0.04),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -57,7 +62,7 @@ class DailyForecastList extends StatelessWidget {
             itemCount: dailyForecasts.length,
             separatorBuilder: (context, index) => Divider(
               height: 1,
-              color: Colors.grey.withValues(alpha: 0.12),
+              color: AppTheme.meltingIce.withValues(alpha: 0.45),
               indent: 16,
               endIndent: 16,
             ),
@@ -82,8 +87,8 @@ class DailyForecastList extends StatelessWidget {
                               fontSize: 14,
                               fontWeight: index == 0 ? FontWeight.w700 : FontWeight.w600,
                               color: index == 0
-                                  ? const Color(0xFF1E88E5)
-                                  : const Color(0xFF1A1F36),
+                                  ? AppTheme.deepOcean
+                                  : AppTheme.blackPine,
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -91,7 +96,7 @@ class DailyForecastList extends StatelessWidget {
                             condition.description,
                             style: const TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF6B7280),
+                              color: AppTheme.textMuted,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -107,7 +112,7 @@ class DailyForecastList extends StatelessWidget {
                         children: [
                           Icon(
                             condition.icon,
-                            color: condition.primaryColor,
+                            color: AppTheme.windstorm,
                             size: 24,
                           ),
                           const SizedBox(width: 6),
@@ -117,7 +122,7 @@ class DailyForecastList extends StatelessWidget {
                               children: [
                                 const Icon(
                                   Icons.umbrella_rounded,
-                                  color: Color(0xFF5C6BC0),
+                                  color: AppTheme.deepOcean,
                                   size: 13,
                                 ),
                                 const SizedBox(width: 2),
@@ -126,7 +131,7 @@ class DailyForecastList extends StatelessWidget {
                                   style: const TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF5C6BC0),
+                                    color: AppTheme.deepOcean,
                                   ),
                                 ),
                               ],
@@ -146,7 +151,7 @@ class DailyForecastList extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF6B7280),
+                              color: AppTheme.textMuted,
                             ),
                           ),
                           const SizedBox(width: 6),
@@ -156,7 +161,11 @@ class DailyForecastList extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
                               gradient: const LinearGradient(
-                                colors: [Color(0xFF81D4FA), Color(0xFFFF8A65)],
+                                colors: [
+                                  AppTheme.meltingIce,
+                                  AppTheme.windstorm,
+                                  Color(0xFFE5C882),
+                                ],
                               ),
                             ),
                           ),
@@ -166,7 +175,7 @@ class DailyForecastList extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF1A1F36),
+                              color: AppTheme.blackPine,
                             ),
                           ),
                         ],

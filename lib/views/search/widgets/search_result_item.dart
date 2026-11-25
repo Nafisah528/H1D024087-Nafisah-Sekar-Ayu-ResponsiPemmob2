@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/location_model.dart';
+import '../../../utils/app_theme.dart';
 
 class SearchResultItem extends StatelessWidget {
   final LocationModel location;
@@ -24,9 +25,13 @@ class SearchResultItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppTheme.meltingIce.withValues(alpha: 0.5),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
+            color: AppTheme.deepOcean.withValues(alpha: 0.03),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -38,12 +43,12 @@ class SearchResultItem extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E88E5).withValues(alpha: 0.1),
+            color: AppTheme.avalanche,
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(
             Icons.location_city_rounded,
-            color: Color(0xFF1E88E5),
+            color: AppTheme.deepOcean,
             size: 22,
           ),
         ),
@@ -52,7 +57,7 @@ class SearchResultItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF1A1F36),
+            color: AppTheme.blackPine,
           ),
         ),
         subtitle: Text(
@@ -61,7 +66,7 @@ class SearchResultItem extends StatelessWidget {
               : location.subtitle,
           style: const TextStyle(
             fontSize: 12,
-            color: Color(0xFF6B7280),
+            color: AppTheme.textMuted,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -73,7 +78,7 @@ class SearchResultItem extends StatelessWidget {
               tooltip: isFavorite ? 'Hapus dari favorit' : 'Tambah ke favorit',
               icon: Icon(
                 isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
-                color: isFavorite ? Colors.amber.shade700 : const Color(0xFF9E9E9E),
+                color: isFavorite ? const Color(0xFFE5A93C) : AppTheme.windstorm,
                 size: 24,
               ),
               onPressed: onToggleFavorite,
@@ -83,7 +88,7 @@ class SearchResultItem extends StatelessWidget {
                 tooltip: 'Hapus dari riwayat',
                 icon: const Icon(
                   Icons.close_rounded,
-                  color: Color(0xFF9E9E9E),
+                  color: AppTheme.windstorm,
                   size: 20,
                 ),
                 onPressed: onDelete,

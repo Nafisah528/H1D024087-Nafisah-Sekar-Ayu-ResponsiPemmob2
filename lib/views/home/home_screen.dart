@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../utils/app_theme.dart';
 import '../../viewmodels/weather_viewmodel.dart';
 import '../search/search_screen.dart';
 import 'widgets/current_weather_card.dart';
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6FA),
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: Consumer<WeatherViewModel>(
           builder: (context, vm, child) {
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Icon(
                   Icons.wb_cloudy_rounded,
-                  color: Color(0xFF1E88E5),
+                  color: AppTheme.deepOcean,
                   size: 24,
                 ),
                 const SizedBox(width: 8),
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFF1A1F36),
+                    color: AppTheme.blackPine,
                   ),
                 ),
               ],
@@ -80,8 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? Icons.star_rounded
                       : Icons.star_outline_rounded,
                   color: vm.isCurrentFavorite
-                      ? Colors.amber.shade700
-                      : const Color(0xFF1A1F36),
+                      ? const Color(0xFFE5A93C)
+                      : AppTheme.deepOcean,
                   size: 26,
                 ),
                 onPressed: () async {
@@ -89,13 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (!context.mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
+                      backgroundColor: AppTheme.blackPine,
                       content: Text(
                         vm.isCurrentFavorite
                             ? 'Lokasi ${vm.currentLocation!.name} ditambahkan ke favorit'
                             : 'Lokasi ${vm.currentLocation!.name} dihapus dari favorit',
+                        style: const TextStyle(
+                          color: AppTheme.sunBeam,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       duration: const Duration(seconds: 2),
                       behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   );
                 },
@@ -108,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             tooltip: 'Cari Lokasi Lain',
             icon: const Icon(
               Icons.search_rounded,
-              color: Color(0xFF1A1F36),
+              color: AppTheme.deepOcean,
               size: 26,
             ),
             onPressed: _navigateToSearch,
@@ -121,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tooltip: 'Segarkan data cuaca',
                 icon: const Icon(
                   Icons.refresh_rounded,
-                  color: Color(0xFF1A1F36),
+                  color: AppTheme.deepOcean,
                   size: 24,
                 ),
                 onPressed: vm.isLoading ? null : () => vm.refreshWeather(),
@@ -141,14 +150,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   CircularProgressIndicator(
                     strokeWidth: 3,
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1E88E5)),
+                    valueColor: AlwaysStoppedAnimation<Color>(AppTheme.deepOcean),
                   ),
                   SizedBox(height: 16),
                   Text(
                     'Mengambil informasi cuaca...',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF6B7280),
+                      color: AppTheme.textMuted,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -183,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF1A1F36),
+                        color: AppTheme.blackPine,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -192,14 +201,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Color(0xFF6B7280),
+                        color: AppTheme.textMuted,
                       ),
                     ),
                     const SizedBox(height: 24),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E88E5),
-                        foregroundColor: Colors.white,
+                        backgroundColor: AppTheme.deepOcean,
+                        foregroundColor: AppTheme.sunBeam,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
                           vertical: 12,
@@ -223,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(
               child: Text(
                 'Tidak ada data cuaca yang dapat ditampilkan.',
-                style: TextStyle(color: Color(0xFF6B7280)),
+                style: TextStyle(color: AppTheme.textMuted),
               ),
             );
           }
@@ -233,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final today = weather.daily.isNotEmpty ? weather.daily.first : null;
 
           return RefreshIndicator(
-            color: const Color(0xFF1E88E5),
+            color: AppTheme.deepOcean,
             onRefresh: () => vm.refreshWeather(),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -251,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: LinearProgressIndicator(
                             minHeight: 2.5,
                             backgroundColor: Colors.transparent,
-                            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1E88E5)),
+                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.deepOcean),
                           ),
                         ),
 
@@ -284,9 +293,9 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: const Color(0xFF1E88E5),
-        foregroundColor: Colors.white,
-        elevation: 3,
+        backgroundColor: AppTheme.deepOcean,
+        foregroundColor: AppTheme.sunBeam,
+        elevation: 4,
         icon: const Icon(Icons.search_rounded),
         label: const Text(
           'Cari Kota',
