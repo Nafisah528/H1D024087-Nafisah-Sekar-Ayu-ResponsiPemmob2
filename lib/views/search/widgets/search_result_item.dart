@@ -23,15 +23,15 @@ class SearchResultItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.cardSurface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: AppTheme.meltingIce.withValues(alpha: 0.5),
-          width: 1,
+          color: AppTheme.windstorm.withValues(alpha: 0.45),
+          width: 1.2,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.deepOcean.withValues(alpha: 0.03),
+            color: AppTheme.deepOcean.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -43,13 +43,13 @@ class SearchResultItem extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppTheme.avalanche,
+            color: AppTheme.deepOcean,
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(
             Icons.location_city_rounded,
-            color: AppTheme.deepOcean,
-            size: 22,
+            color: AppTheme.sunBeam,
+            size: 20,
           ),
         ),
         title: Text(
@@ -66,6 +66,7 @@ class SearchResultItem extends StatelessWidget {
               : location.subtitle,
           style: const TextStyle(
             fontSize: 12,
+            fontWeight: FontWeight.w500,
             color: AppTheme.textMuted,
           ),
           maxLines: 1,
@@ -78,7 +79,7 @@ class SearchResultItem extends StatelessWidget {
               tooltip: isFavorite ? 'Hapus dari favorit' : 'Tambah ke favorit',
               icon: Icon(
                 isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
-                color: isFavorite ? const Color(0xFFE5A93C) : AppTheme.windstorm,
+                color: isFavorite ? const Color(0xFFD48B16) : AppTheme.deepOcean,
                 size: 24,
               ),
               onPressed: onToggleFavorite,
@@ -88,7 +89,7 @@ class SearchResultItem extends StatelessWidget {
                 tooltip: 'Hapus dari riwayat',
                 icon: const Icon(
                   Icons.close_rounded,
-                  color: AppTheme.windstorm,
+                  color: AppTheme.deepOcean,
                   size: 20,
                 ),
                 onPressed: onDelete,

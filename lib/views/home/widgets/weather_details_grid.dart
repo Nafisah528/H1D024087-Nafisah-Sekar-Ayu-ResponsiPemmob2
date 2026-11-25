@@ -33,8 +33,6 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.water_drop_rounded,
-                iconColor: AppTheme.windstorm,
-                iconBgColor: AppTheme.meltingIce.withValues(alpha: 0.4),
                 title: 'Kelembapan',
                 value: '${current.relativeHumidity}%',
                 subtitle: 'Udara lembap',
@@ -44,8 +42,6 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.air_rounded,
-                iconColor: AppTheme.deepOcean,
-                iconBgColor: AppTheme.avalanche,
                 title: 'Kecepatan Angin',
                 value: '${current.windSpeed.toStringAsFixed(1)} km/h',
                 subtitle: 'Angin sepoi',
@@ -59,8 +55,6 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.umbrella_rounded,
-                iconColor: AppTheme.windstorm,
-                iconBgColor: AppTheme.meltingIce.withValues(alpha: 0.4),
                 title: 'Peluang Hujan',
                 value: '$rainProb%',
                 subtitle: 'Kemungkinan presipitasi',
@@ -70,8 +64,6 @@ class WeatherDetailsGrid extends StatelessWidget {
             Expanded(
               child: _buildDetailCard(
                 icon: Icons.grain_rounded,
-                iconColor: AppTheme.deepOcean,
-                iconBgColor: AppTheme.avalanche,
                 title: 'Curah Hujan',
                 value: '${current.precipitation.toStringAsFixed(1)} mm',
                 subtitle: 'Akumulasi saat ini',
@@ -85,8 +77,6 @@ class WeatherDetailsGrid extends StatelessWidget {
 
   Widget _buildDetailCard({
     required IconData icon,
-    required Color iconColor,
-    required Color iconBgColor,
     required String title,
     required String value,
     required String subtitle,
@@ -94,15 +84,15 @@ class WeatherDetailsGrid extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.cardSurface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppTheme.meltingIce.withValues(alpha: 0.5),
-          width: 1,
+          color: AppTheme.windstorm.withValues(alpha: 0.45),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.deepOcean.withValues(alpha: 0.04),
+            color: AppTheme.deepOcean.withValues(alpha: 0.08),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -111,38 +101,44 @@ class WeatherDetailsGrid extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Icon badge using Deep Ocean background with Sun Beam icon
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: iconBgColor,
+              color: AppTheme.deepOcean,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: iconColor, size: 22),
+            child: Icon(
+              icon,
+              color: AppTheme.sunBeam,
+              size: 20,
+            ),
           ),
           const SizedBox(height: 12),
           Text(
             title,
             style: const TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: AppTheme.textMuted,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.deepOcean,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             value,
             style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
               color: AppTheme.blackPine,
             ),
           ),
           const SizedBox(height: 2),
           Text(
             subtitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
-              color: AppTheme.textMuted.withValues(alpha: 0.8),
+              fontWeight: FontWeight.w500,
+              color: AppTheme.textMuted,
             ),
           ),
         ],

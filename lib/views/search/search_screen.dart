@@ -55,13 +55,15 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
     final searchVM = Provider.of<SearchViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppTheme.backgroundLight,
+      backgroundColor: AppTheme.avalanche,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: const Text(
           'Pencarian Lokasi',
           style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
+            fontSize: 21,
+            fontWeight: FontWeight.w800,
             color: AppTheme.blackPine,
           ),
         ),
@@ -75,15 +77,25 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
             child: TextField(
               controller: _searchController,
               textInputAction: TextInputAction.search,
+              style: const TextStyle(
+                color: AppTheme.blackPine,
+                fontWeight: FontWeight.w600,
+              ),
               decoration: InputDecoration(
+                filled: true,
+                fillColor: AppTheme.cardSurface,
                 hintText: 'Cari nama kota (cth: Bandung, Surabaya, Tokyo)...',
+                hintStyle: TextStyle(
+                  color: AppTheme.deepOcean.withValues(alpha: 0.6),
+                  fontSize: 14,
+                ),
                 prefixIcon: const Icon(
                   Icons.search_rounded,
                   color: AppTheme.deepOcean,
                 ),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
-                        icon: const Icon(Icons.clear_rounded, color: AppTheme.windstorm),
+                        icon: const Icon(Icons.clear_rounded, color: AppTheme.deepOcean),
                         onPressed: () {
                           _searchController.clear();
                           searchVM.clearSearch();
@@ -91,6 +103,20 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                         },
                       )
                     : null,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: AppTheme.windstorm.withValues(alpha: 0.5),
+                    width: 1.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppTheme.deepOcean,
+                    width: 2,
+                  ),
+                ),
               ),
               onChanged: (value) {
                 setState(() {});
@@ -127,7 +153,11 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
             SizedBox(height: 14),
             Text(
               'Mencari kota di Open-Meteo...',
-              style: TextStyle(color: AppTheme.textMuted, fontSize: 14),
+              style: TextStyle(
+                color: AppTheme.deepOcean,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -146,7 +176,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               const Text(
                 'Terjadi Masalah Pencarian',
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   fontSize: 16,
                   color: AppTheme.blackPine,
                 ),
@@ -155,7 +185,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               Text(
                 searchVM.searchError!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppTheme.textMuted, fontSize: 13),
+                style: const TextStyle(color: AppTheme.deepOcean, fontSize: 13),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -179,12 +209,12 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.location_off_rounded, color: AppTheme.windstorm, size: 54),
+              const Icon(Icons.location_off_rounded, color: AppTheme.deepOcean, size: 54),
               const SizedBox(height: 14),
               const Text(
                 'Kota Tidak Ditemukan',
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   fontSize: 16,
                   color: AppTheme.blackPine,
                 ),
@@ -193,7 +223,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               Text(
                 'Tidak ada hasil untuk "${_searchController.text}".\nCoba periksa kembali ejaan nama kota.',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppTheme.textMuted, fontSize: 13),
+                style: const TextStyle(color: AppTheme.deepOcean, fontSize: 13),
               ),
             ],
           ),
@@ -225,20 +255,23 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
           decoration: BoxDecoration(
-            color: AppTheme.avalanche.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppTheme.meltingIce.withValues(alpha: 0.7)),
+            color: AppTheme.cardSurface,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: AppTheme.windstorm.withValues(alpha: 0.5),
+              width: 1.5,
+            ),
           ),
           child: TabBar(
             controller: _tabController,
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
               color: AppTheme.deepOcean,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(13),
             ),
             labelColor: AppTheme.sunBeam,
             unselectedLabelColor: AppTheme.deepOcean,
-            labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
             dividerColor: Colors.transparent,
             tabs: [
               Tab(
@@ -287,12 +320,12 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.star_border_rounded, size: 54, color: AppTheme.windstorm),
+              Icon(Icons.star_border_rounded, size: 54, color: AppTheme.deepOcean),
               SizedBox(height: 12),
               Text(
                 'Belum Ada Lokasi Favorit',
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   fontSize: 16,
                   color: AppTheme.blackPine,
                 ),
@@ -301,7 +334,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               Text(
                 'Cari kota di atas lalu tekan ikon bintang untuk menyimpannya sebagai favorit.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: AppTheme.textMuted, fontSize: 13),
+                style: TextStyle(color: AppTheme.deepOcean, fontSize: 13),
               ),
             ],
           ),
@@ -333,12 +366,12 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.history_rounded, size: 54, color: AppTheme.windstorm),
+              Icon(Icons.history_rounded, size: 54, color: AppTheme.deepOcean),
               SizedBox(height: 12),
               Text(
                 'Belum Ada Riwayat',
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   fontSize: 16,
                   color: AppTheme.blackPine,
                 ),
@@ -347,7 +380,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               Text(
                 'Kota yang Anda pilih dari hasil pencarian akan tercatat di sini.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: AppTheme.textMuted, fontSize: 13),
+                style: TextStyle(color: AppTheme.deepOcean, fontSize: 13),
               ),
             ],
           ),
@@ -365,20 +398,23 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               const Text(
                 'Riwayat Terakhir',
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                   fontSize: 13,
-                  color: AppTheme.textMuted,
+                  color: AppTheme.deepOcean,
                 ),
               ),
               TextButton.icon(
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.red.shade600,
+                  foregroundColor: Colors.red.shade700,
                   padding: EdgeInsets.zero,
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 icon: const Icon(Icons.delete_sweep_rounded, size: 16),
-                label: const Text('Hapus Semua', style: TextStyle(fontSize: 12)),
+                label: const Text(
+                  'Hapus Semua',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                ),
                 onPressed: () => searchVM.clearAllHistory(),
               ),
             ],

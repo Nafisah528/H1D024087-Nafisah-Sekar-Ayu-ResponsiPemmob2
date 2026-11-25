@@ -42,25 +42,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundLight,
+      backgroundColor: AppTheme.avalanche,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Consumer<WeatherViewModel>(
           builder: (context, vm, child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.wb_cloudy_rounded,
-                  color: AppTheme.deepOcean,
-                  size: 24,
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: AppTheme.deepOcean,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.wb_cloudy_rounded,
+                    color: AppTheme.sunBeam,
+                    size: 20,
+                  ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Text(
                   vm.currentLocation?.name ?? 'Cuaca Terkini',
                   style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w800,
                     color: AppTheme.blackPine,
+                    letterSpacing: -0.3,
                   ),
                 ),
               ],
@@ -72,72 +82,111 @@ class _HomeScreenState extends State<HomeScreen> {
           Consumer<WeatherViewModel>(
             builder: (context, vm, child) {
               if (vm.currentLocation == null) return const SizedBox.shrink();
-              return IconButton(
-                tooltip: vm.isCurrentFavorite
-                    ? 'Hapus dari favorit'
-                    : 'Simpan ke favorit',
-                icon: Icon(
-                  vm.isCurrentFavorite
-                      ? Icons.star_rounded
-                      : Icons.star_outline_rounded,
-                  color: vm.isCurrentFavorite
-                      ? const Color(0xFFE5A93C)
-                      : AppTheme.deepOcean,
-                  size: 26,
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                decoration: BoxDecoration(
+                  color: AppTheme.cardSurface,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppTheme.windstorm.withValues(alpha: 0.4),
+                    width: 1,
+                  ),
                 ),
-                onPressed: () async {
-                  await vm.toggleCurrentFavorite();
-                  if (!context.mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: AppTheme.blackPine,
-                      content: Text(
-                        vm.isCurrentFavorite
-                            ? 'Lokasi ${vm.currentLocation!.name} ditambahkan ke favorit'
-                            : 'Lokasi ${vm.currentLocation!.name} dihapus dari favorit',
-                        style: const TextStyle(
-                          color: AppTheme.sunBeam,
-                          fontWeight: FontWeight.w500,
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  tooltip: vm.isCurrentFavorite
+                      ? 'Hapus dari favorit'
+                      : 'Simpan ke favorit',
+                  icon: Icon(
+                    vm.isCurrentFavorite
+                        ? Icons.star_rounded
+                        : Icons.star_outline_rounded,
+                    color: vm.isCurrentFavorite
+                        ? const Color(0xFFD48B16)
+                        : AppTheme.deepOcean,
+                    size: 22,
+                  ),
+                  onPressed: () async {
+                    await vm.toggleCurrentFavorite();
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppTheme.blackPine,
+                        content: Text(
+                          vm.isCurrentFavorite
+                              ? 'Lokasi ${vm.currentLocation!.name} ditambahkan ke favorit'
+                              : 'Lokasi ${vm.currentLocation!.name} dihapus dari favorit',
+                          style: const TextStyle(
+                            color: AppTheme.sunBeam,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        duration: const Duration(seconds: 2),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      duration: const Duration(seconds: 2),
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             },
           ),
 
           // Tombol Search
-          IconButton(
-            tooltip: 'Cari Lokasi Lain',
-            icon: const Icon(
-              Icons.search_rounded,
-              color: AppTheme.deepOcean,
-              size: 26,
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            decoration: BoxDecoration(
+              color: AppTheme.cardSurface,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: AppTheme.windstorm.withValues(alpha: 0.4),
+                width: 1,
+              ),
             ),
-            onPressed: _navigateToSearch,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+              tooltip: 'Cari Lokasi Lain',
+              icon: const Icon(
+                Icons.search_rounded,
+                color: AppTheme.deepOcean,
+                size: 22,
+              ),
+              onPressed: _navigateToSearch,
+            ),
           ),
 
           // Tombol Refresh
           Consumer<WeatherViewModel>(
             builder: (context, vm, child) {
-              return IconButton(
-                tooltip: 'Segarkan data cuaca',
-                icon: const Icon(
-                  Icons.refresh_rounded,
-                  color: AppTheme.deepOcean,
-                  size: 24,
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                decoration: BoxDecoration(
+                  color: AppTheme.cardSurface,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppTheme.windstorm.withValues(alpha: 0.4),
+                    width: 1,
+                  ),
                 ),
-                onPressed: vm.isLoading ? null : () => vm.refreshWeather(),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  tooltip: 'Segarkan data cuaca',
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    color: AppTheme.deepOcean,
+                    size: 22,
+                  ),
+                  onPressed: vm.isLoading ? null : () => vm.refreshWeather(),
+                ),
               );
             },
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 8),
         ],
       ),
       body: Consumer<WeatherViewModel>(
@@ -157,8 +206,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Mengambil informasi cuaca...',
                     style: TextStyle(
                       fontSize: 14,
-                      color: AppTheme.textMuted,
-                      fontWeight: FontWeight.w500,
+                      color: AppTheme.deepOcean,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
@@ -177,8 +226,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade50,
+                        color: AppTheme.cardSurface,
                         shape: BoxShape.circle,
+                        border: Border.all(color: Colors.red.shade300, width: 1.5),
                       ),
                       child: Icon(
                         Icons.cloud_off_rounded,
@@ -191,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'Gagal Memuat Cuaca',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w800,
                         color: AppTheme.blackPine,
                       ),
                     ),
@@ -201,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: AppTheme.textMuted,
+                        color: AppTheme.deepOcean,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -219,7 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       onPressed: () => vm.refreshWeather(),
                       icon: const Icon(Icons.refresh_rounded, size: 20),
-                      label: const Text('Coba Lagi'),
+                      label: const Text(
+                        'Coba Lagi',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ],
                 ),
@@ -232,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(
               child: Text(
                 'Tidak ada data cuaca yang dapat ditampilkan.',
-                style: TextStyle(color: AppTheme.textMuted),
+                style: TextStyle(color: AppTheme.deepOcean),
               ),
             );
           }
@@ -243,6 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return RefreshIndicator(
             color: AppTheme.deepOcean,
+            backgroundColor: AppTheme.cardSurface,
             onRefresh: () => vm.refreshWeather(),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -258,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Padding(
                           padding: EdgeInsets.only(bottom: 12),
                           child: LinearProgressIndicator(
-                            minHeight: 2.5,
+                            minHeight: 3,
                             backgroundColor: Colors.transparent,
                             valueColor: AlwaysStoppedAnimation<Color>(AppTheme.deepOcean),
                           ),
@@ -295,11 +349,11 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppTheme.deepOcean,
         foregroundColor: AppTheme.sunBeam,
-        elevation: 4,
+        elevation: 5,
         icon: const Icon(Icons.search_rounded),
         label: const Text(
           'Cari Kota',
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w700, letterSpacing: 0.3),
         ),
         onPressed: _navigateToSearch,
       ),

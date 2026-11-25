@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Brand color palette:
-  // Black Pine:  #152026
-  // Deep Ocean:  #1B3D59
-  // Windstorm:   #6A97C0
-  // Melting Ice: #B3D5F1
-  // Avalanche:   #D4EEF8
-  // Sun Beam:    #F3EED8
+  // Brand color palette (Winter Palette):
+  // 1. Black Pine:  #152026
+  // 2. Deep Ocean:  #1B3D59
+  // 3. Windstorm:   #6A97C0
+  // 4. Melting Ice: #B3D5F1
+  // 5. Avalanche:   #D4EEF8
+  // 6. Sun Beam:    #F3EED8
 
   static const Color blackPine = Color(0xFF152026);
   static const Color deepOcean = Color(0xFF1B3D59);
@@ -16,11 +16,12 @@ class AppTheme {
   static const Color avalanche = Color(0xFFD4EEF8);
   static const Color sunBeam = Color(0xFFF3EED8);
 
-  // Semantics & Surfacing
-  static const Color backgroundLight = Color(0xFFF0F7FB);
-  static const Color surfaceLight = Colors.white;
-  static const Color textDark = blackPine;
-  static const Color textMuted = Color(0xFF4C6B7E);
+  // Surface and text colors based on the palette (no plain white)
+  static const Color backgroundLight = avalanche; // #D4EEF8
+  static const Color cardSurface = Color(0xFFE2EFF9); // Tinted with Melting Ice & Avalanche
+  static const Color textDark = blackPine; // #152026
+  static const Color textSecondary = deepOcean; // #1B3D59
+  static const Color textMuted = Color(0xFF385A75); // Deeper Windstorm tone
 
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
@@ -29,13 +30,13 @@ class AppTheme {
       primary: deepOcean,
       secondary: windstorm,
       tertiary: sunBeam,
-      surface: surfaceLight,
+      surface: cardSurface,
     );
 
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: backgroundLight,
+      scaffoldBackgroundColor: avalanche,
       fontFamily: 'Roboto',
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -51,36 +52,36 @@ class AppTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: surfaceLight,
+        color: cardSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color: meltingIce.withValues(alpha: 0.5),
-            width: 1,
+            color: windstorm.withValues(alpha: 0.4),
+            width: 1.2,
           ),
         ),
         margin: EdgeInsets.zero,
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: surfaceLight,
+        fillColor: cardSurface,
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        hintStyle: const TextStyle(
-          color: textMuted,
+        hintStyle: TextStyle(
+          color: textMuted.withValues(alpha: 0.7),
           fontSize: 14,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: meltingIce.withValues(alpha: 0.6)),
+          borderSide: BorderSide(color: windstorm.withValues(alpha: 0.5)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: meltingIce.withValues(alpha: 0.6)),
+          borderSide: BorderSide(color: windstorm.withValues(alpha: 0.5)),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
-          borderSide: BorderSide(color: deepOcean, width: 1.8),
+          borderSide: BorderSide(color: deepOcean, width: 2),
         ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -108,7 +109,7 @@ class AppTheme {
         ),
         titleMedium: TextStyle(
           fontSize: 15,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w700,
           color: blackPine,
         ),
         bodyLarge: TextStyle(
@@ -117,7 +118,7 @@ class AppTheme {
         ),
         bodyMedium: TextStyle(
           fontSize: 13,
-          color: textMuted,
+          color: textSecondary,
         ),
       ),
     );
