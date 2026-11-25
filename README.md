@@ -182,11 +182,11 @@ Menggunakan package **`shared_preferences`** untuk menyimpan data secara persist
 
 | 1. Home / Weather Screen | 2. Search Screen (Pencarian) | 3. Search Screen (Favorit & Riwayat) |
 | :---: | :---: | :---: |
-| ![Home Weather Screen](screenshots/screen_home.png) | ![Search API Results](screenshots/screen_search_results.png) | ![Favorites and History](screenshots/screen_favorites_history.png) |
+| ![Home Weather Screen](<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/44d5c5dc-540c-468d-8d53-3ef97013e877" /> <img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/17befc6e-0163-4f38-93d3-96f4ba474698" />
 
-> *Catatan: Letakkan file tangkapan layar aplikasi ke dalam direktori `screenshots/` sesuai penamaan di atas sebelum pengumpulan.*
+) | ![Search API Results]<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/81248131-9480-4b8e-87aa-f5aad3b7d65c" /> <img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/34830fed-54cd-451a-8864-0c2de4b22eae" />
 
----
+ | ![Favorites and History]<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/bbb59e58-b94c-472f-b839-fab9c40c6e2f" /> <img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/509d9f7c-a8c1-40a7-b11a-ba5f14b3aa1a" /> <img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/33e17cae-cf89-4d26-ac9b-342365635ca4" />
 
 ## Panduan Menjalankan Aplikasi
 
@@ -237,8 +237,3 @@ Jalankan juga analisis kode statis untuk memastikan kode bersih dari kesalahan m
 flutter analyze
 ```
 
----
-
-## Ketentuan Pengumpulan
-- **Link Pengumpulan**: [Google Forms](https://forms.gle/vz5LUdPVZmJ2F5uKA)
-- **Batas Pengerjaan**: 26 November 2026, Pukul 10:00 Pagi WIB
