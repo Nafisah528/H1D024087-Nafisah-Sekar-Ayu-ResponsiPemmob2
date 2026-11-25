@@ -49,10 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Consumer<WeatherViewModel>(
           builder: (context, vm, child) {
             return Row(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(7),
+                  padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color: AppTheme.deepOcean,
                     borderRadius: BorderRadius.circular(10),
@@ -60,17 +59,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Icon(
                     Icons.wb_cloudy_rounded,
                     color: AppTheme.sunBeam,
-                    size: 20,
+                    size: 19,
                   ),
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  vm.currentLocation?.name ?? 'Cuaca Terkini',
-                  style: const TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.w800,
-                    color: AppTheme.blackPine,
-                    letterSpacing: -0.3,
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    vm.currentLocation?.name ?? 'Cuaca Terkini',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: AppTheme.blackPine,
+                      letterSpacing: -0.3,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
